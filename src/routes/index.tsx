@@ -8,10 +8,15 @@ import { fmtDate, stripHtml } from "@/lib/format";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(homeQuery),
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { title: "The Little Cove — a quiet scrapbook of slow living" },
-      { name: "description", content: "Hana's personal scrapbook: journal pages, insect field notes, recipes, ikebana and haiku." },
+      {
+        name: "description",
+        content:
+          (matches[0]?.loaderData as any)?.settings?.site?.seo_description ||
+          "Hana's personal scrapbook: journal pages, insect field notes, recipes, ikebana and haiku.",
+      },
       { property: "og:title", content: "The Little Cove" },
       { property: "og:description", content: "A quiet corner for slow living, memories & observations." },
     ],
@@ -70,8 +75,8 @@ function Home() {
           <figure className="polaroid relative rotate-[3deg] transition-transform duration-500 hover:rotate-[1deg]">
             <span className="tape -top-3 left-1/2 -translate-x-1/2 rotate-[-4deg]" />
             <img
-              src={featured?.cover_image_url ?? "/images/cedar.jpg"}
-              alt={featured?.cover_image_alt ?? "A quiet garden scene"}
+              src={home.polaroid_image || featured?.cover_image_url || "/images/cedar.jpg"}
+              alt={home.polaroid_image ? home.polaroid_caption || "" : featured?.cover_image_alt ?? "A quiet garden scene"}
               className="aspect-square w-full object-cover"
               width={600}
               height={600}

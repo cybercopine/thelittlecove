@@ -58,12 +58,15 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteQuery),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "The Little Cove" },
-      { name: "description", content: "A personal scrapbook of journal pages, field notes, recipes, ikebana and haiku." },
+      {
+        name: "description",
+        content: (loaderData as any)?.settings?.site?.seo_description || "A personal scrapbook of journal pages, field notes, recipes, ikebana and haiku.",
+      },
       { name: "author", content: "Hana" },
       { property: "og:site_name", content: "The Little Cove" },
       { property: "og:type", content: "website" },
