@@ -103,5 +103,5 @@ export const TEMPLATES: TemplateDef[] = [
 ];
 
 export function getTemplate(id: string | null | undefined): TemplateDef {
-  return TEMPLATES.find((t) => t.id === id) ?? TEMPLATES[0];
+  return (TEMPLATES.find((t) => t.id === id) ?? TEMPLATES[0])!;
 }

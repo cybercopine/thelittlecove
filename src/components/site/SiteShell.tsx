@@ -116,7 +116,7 @@ function Footer() {
         <a href="#main" className="hover:text-moss">Back to top ↑</a>
         <Link to="/about" className="hover:text-moss">About Hana</Link>
         <Link to="/archive" className="hover:text-moss">Archive</Link>
-        <Link to="/admin" className="hover:text-moss">Dashboard</Link>
+        
       </nav>
     </footer>
   );
