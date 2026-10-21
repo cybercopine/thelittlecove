@@ -49,7 +49,12 @@ function AdminLayout() {
   } = useQuery({ queryKey: ["admin", "me"], queryFn: getAdminState, staleTime: 60_000 });
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange(() => refetch());
+    // Never call Supabase inside this callback directly (and never return a promise
+    // from it): the auth client waits for the callback while holding its lock,
+    // which would freeze every later request, uploads included. Defer instead.
+    const { data } = supabase.auth.onAuthStateChange(() => {
+      setTimeout(() => refetch(), 0);
+    });
     return () => data.subscription.unsubscribe();
   }, [refetch]);
 

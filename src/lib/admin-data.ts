@@ -371,20 +371,62 @@ async function optimize(
     const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
     return { blob: file, width, height, ext, type: file.type };
   }
-  return { blob, width, height, ext: "webp", type: "image/webp" };
+  const realType = blob.type || "image/webp";
+  return {
+    blob,
+    width,
+    height,
+    ext: realType.split("/")[1].replace("jpeg", "jpg"),
+    type: realType,
+  };
 }
+
+function withTimeout<T>(p: Promise<T>, ms: number, msg: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error(msg)), ms);
+    p.then(
+      (v) => {
+        clearTimeout(t);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(t);
+        reject(e);
+      },
+    );
+  });
+}
+
+const BROWSER_IMAGE = /^image\/(jpeg|png|webp|gif|avif|svg\+xml)$/;
 
 export async function uploadMedia(
   file: File,
   meta: { folder?: string | null; alt?: string; caption?: string } = {},
 ): Promise<MediaItem> {
-  const { blob, width, height, ext, type } = await optimize(file);
+  const opt = await withTimeout(
+    optimize(file),
+    30_000,
+    "Couldn't prepare this photo. Try saving it as a JPEG first.",
+  );
+  const { blob, width, height, ext } = opt;
+  let { type } = opt;
+  // Some browsers (e.g. older Safari) silently return PNG when asked for WebP.
+  if (blob.type && blob.type !== type) type = blob.type;
+  if (!BROWSER_IMAGE.test(type)) {
+    throw new Error(
+      "This photo format (often HEIC from iPhones) can't be shown on websites. Export it as JPEG and upload again.",
+    );
+  }
   const base = slugify(file.name.replace(/\.[^.]+$/, "")).slice(0, 40) || "photo";
   const d = new Date();
   const path = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}/${base}-${crypto.randomUUID().slice(0, 8)}.${ext}`;
-  const { error: upErr } = await supabase.storage
-    .from(MEDIA_BUCKET)
-    .upload(path, blob, { contentType: type, cacheControl: "31536000", upsert: false });
+  const { error: upErr } = await withTimeout(
+    supabase.storage
+      .from(MEDIA_BUCKET)
+      .upload(path, blob, { contentType: type, cacheControl: "31536000", upsert: false }),
+    120_000,
+    "The upload timed out. Check your internet connection, refresh the page and try again.",
+  );
   if (upErr) throw new Error(`Upload failed: ${upErr.message}`);
   const { data, error } = await supabase
     .from("media")
