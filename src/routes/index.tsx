@@ -36,19 +36,21 @@ function Home() {
   return (
     <div className="relative">
       {/* stamp */}
-      <div className="pointer-events-none absolute -top-2 right-0 hidden rotate-[-8deg] rounded-full border border-dashed border-muted-foreground/60 p-3 text-center text-[0.6rem] uppercase leading-4 tracking-[0.2em] text-muted-foreground md:block" aria-hidden>
+      <div className="pointer-events-none absolute right-2 top-2 z-20 hidden h-24 w-24 rotate-[-8deg] place-items-center rounded-full border border-dashed border-moss/50 bg-ivory/85 text-center text-[0.6rem] uppercase leading-4 tracking-[0.2em] text-moss/80 shadow-[0_0_0_4px_var(--ivory)] lg:grid" aria-hidden>
+        <span>
         The Little
         <br />
         Cove
         <br />
         <span className="font-display text-sm normal-case tracking-normal">{stamp.toLocaleDateString("en-GB", { month: "short", year: "numeric" })}</span>
+        </span>
       </div>
 
       <section className="grid gap-10 pt-12 lg:grid-cols-[1.35fr_1fr] lg:gap-6">
         {/* welcome letter */}
-        <div className="relative">
+        <div className="relative self-start">
           <span className="tape -top-3 left-14 rotate-[-2deg] bg-oat/80" />
-          <div className="paper relative rotate-[-0.4deg] p-7 sm:p-10">
+          <div className={`paper relative rotate-[-0.4deg] p-7 sm:p-10 ${home.sticky_note ? "pb-16 sm:pb-16" : ""}`}>
             <p className="flex items-center gap-2 font-hand text-xl text-muted-foreground">
               <CalendarDays className="h-4 w-4" /> {fmtDate(new Date().toISOString(), { month: "long", day: "numeric" })} · {home.intro_date}
             </p>
@@ -63,15 +65,16 @@ function Home() {
             <p className="mt-6 text-right font-hand text-2xl text-foreground/80">{home.signature}</p>
           </div>
           {home.sticky_note && (
-            <p className="absolute -bottom-5 right-0 rotate-[1.5deg] bg-note px-4 py-2 font-hand text-lg text-foreground/70 shadow-sm sm:right-[-1rem]">
-              ✎ {home.sticky_note}
+            <p className="absolute -bottom-6 right-6 z-10 max-w-[16rem] rotate-[2.5deg] bg-note px-5 pb-3 pt-4 font-hand text-xl leading-6 text-foreground/75 shadow-md transition-transform duration-500 hover:rotate-[1deg] sm:right-10">
+              <span className="tape -top-3 left-1/2 h-5 w-16 -translate-x-1/2 rotate-[-3deg] bg-blush/70" aria-hidden />
+              {home.sticky_note}
             </p>
           )}
         </div>
 
         {/* polaroid + currently exploring */}
-        <div className="relative mx-auto w-full max-w-sm pt-4 lg:pt-8">
-          <Fern className="absolute -right-4 -top-6 h-20 w-20 text-moss/80" />
+        <div className="relative mx-auto w-full max-w-sm pt-4 lg:pt-24">
+          <Fern className="absolute -left-12 top-14 hidden h-20 w-20 -scale-x-100 text-moss/70 lg:block" />
           <figure className="polaroid relative rotate-[3deg] transition-transform duration-500 hover:rotate-[1deg]">
             <span className="tape -top-3 left-1/2 -translate-x-1/2 rotate-[-4deg]" />
             <img
@@ -84,7 +87,7 @@ function Home() {
             <figcaption className="mt-3 text-right font-hand text-xl text-muted-foreground">{home.polaroid_caption}</figcaption>
           </figure>
           {lately.length > 0 && (
-            <aside aria-label="Currently exploring" className="relative -mt-10 ml-[-1.5rem] w-[92%] rotate-[-3deg] bg-oat p-5 shadow-md transition-transform hover:rotate-[-1.5deg] sm:ml-[-3rem]">
+            <aside aria-label="Currently exploring" className="relative -mt-4 ml-[-1.5rem] w-[92%] rotate-[-3deg] bg-oat p-5 shadow-md transition-transform hover:rotate-[-1.5deg] sm:ml-[-3rem]">
               <span className="absolute -top-4 right-8 h-10 w-3 rounded-full border-2 border-muted-foreground/50" aria-hidden />
               <h2 className="flex items-center gap-2 font-serif text-xs uppercase tracking-[0.25em] text-foreground/80">
                 <Plus className="h-3 w-3" /> Currently exploring
