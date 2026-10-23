@@ -336,6 +336,16 @@ function SettingsPage() {
         <Panel id="site" title="Tagline & search engines">
           <div className="grid gap-4">
             <Labeled
+              label="Browser tab title (homepage)"
+              hint="The name shown on the browser tab and in Google results for your homepage. Keep it under ~60 characters."
+            >
+              <input
+                {...s("home_title")}
+                placeholder="The Little Cove — a quiet scrapbook of slow living"
+                className={inputCls}
+              />
+            </Labeled>
+            <Labeled
               label="Tagline"
               hint="The handwritten line under “The Little Cove” in the header."
             >
