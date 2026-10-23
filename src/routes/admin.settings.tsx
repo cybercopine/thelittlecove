@@ -177,6 +177,29 @@ function SettingsPage() {
                 className={`${inputCls} font-hand text-xl leading-8`}
               />
             </Labeled>
+            <div className="grid gap-4 md:col-span-2 md:grid-cols-3">
+              <Labeled label="Heading above the featured post">
+                <input
+                  {...h("section_featured")}
+                  placeholder="From the journal"
+                  className={inputCls}
+                />
+              </Labeled>
+              <Labeled label="Heading above recent posts">
+                <input
+                  {...h("section_recent")}
+                  placeholder="Recent Artifacts & Notebook Leaves"
+                  className={inputCls}
+                />
+              </Labeled>
+              <Labeled label="Heading above the sections">
+                <input
+                  {...h("section_chapters")}
+                  placeholder="Chapters of the Cove"
+                  className={inputCls}
+                />
+              </Labeled>
+            </div>
             <Labeled label="Favourite quote">
               <textarea
                 {...h("quote")}

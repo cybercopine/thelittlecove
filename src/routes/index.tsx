@@ -107,7 +107,7 @@ function Home() {
       {/* featured */}
       {featured && (
         <section className="mt-20" aria-labelledby="featured-h">
-          <Divider label="From the journal" />
+          <Divider label={home.section_featured || "From the journal"} />
           <Link
             to="/$category/$slug"
             params={{ category: featured.category?.slug ?? "journal", slug: featured.slug }}
@@ -128,7 +128,7 @@ function Home() {
 
       {/* recent */}
       <section className="mt-20" aria-labelledby="recent-h">
-        <Divider label="Recent Artifacts & Notebook Leaves" />
+        <Divider label={home.section_recent || "Recent Artifacts & Notebook Leaves"} />
         <h2 id="recent-h" className="sr-only">Recent posts</h2>
         <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {data.recent.map((p, i) => (
@@ -139,7 +139,7 @@ function Home() {
 
       {/* sections */}
       <section className="mt-20" aria-label="Sections of the cove">
-        <Divider label="Chapters of the Cove" />
+        <Divider label={home.section_chapters || "Chapters of the Cove"} />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {site.categories.filter((c: any) => c.in_nav).map((c: any, i: number) => (
             <Link
