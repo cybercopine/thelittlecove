@@ -137,6 +137,27 @@ function Thumb({ id }: { id: string }) {
           <div className="bg-sage/40" />
         </div>
       );
+    case "paper":
+      return (
+        <div className={box}>
+          <div className="mb-2 border border-oat bg-paper p-1.5 shadow-sm">
+            <div className="space-y-1">
+              {line("85%", "bg-moss/50")}
+              {line("55%")}
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <div className="flex gap-1">
+              <span className="h-1.5 w-2 rounded-full bg-sage" />
+              {line("80%")}
+            </div>
+            <div className="flex gap-1">
+              <span className="h-1.5 w-2 rounded-full bg-sage" />
+              {line("65%")}
+            </div>
+          </div>
+        </div>
+      );
     case "haiku":
       return (
         <div className={`${box} grid place-items-center`}>

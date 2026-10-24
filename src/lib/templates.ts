@@ -3,7 +3,14 @@
 // templates fall back to the Personal Journal layout.
 
 export type FieldDef =
-  | { key: string; label: string; type: "text" | "date" | "textarea"; placeholder?: string; hint?: string; italic?: boolean }
+  | {
+      key: string;
+      label: string;
+      type: "text" | "date" | "textarea";
+      placeholder?: string;
+      hint?: string;
+      italic?: boolean;
+    }
   | { key: string; label: string; type: "list"; placeholder?: string; hint?: string }
   | { key: string; label: string; type: "links"; hint?: string };
 
@@ -43,7 +50,14 @@ export const TEMPLATES: TemplateDef[] = [
     usesGallery: true,
     fields: [
       { key: "common_name", label: "Common name", type: "text", placeholder: "Cecropia moth" },
-      { key: "scientific_name", label: "Scientific name", type: "text", placeholder: "Hyalophora cecropia", italic: true, hint: "Shown in italics automatically." },
+      {
+        key: "scientific_name",
+        label: "Scientific name",
+        type: "text",
+        placeholder: "Hyalophora cecropia",
+        italic: true,
+        hint: "Shown in italics automatically.",
+      },
       { key: "observed_on", label: "Observation date", type: "date" },
       { key: "location", label: "Observation location", type: "text", placeholder: "Back garden" },
       { key: "specimen_no", label: "Plate / specimen number", type: "text", placeholder: "04" },
@@ -60,7 +74,12 @@ export const TEMPLATES: TemplateDef[] = [
       { key: "prep_time", label: "Preparation time", type: "text", placeholder: "10 min" },
       { key: "cook_time", label: "Cooking time", type: "text", placeholder: "25 min" },
       { key: "servings", label: "Servings", type: "text", placeholder: "4" },
-      { key: "ingredients", label: "Ingredients (one per line, with measurements)", type: "list", placeholder: "200 g flour" },
+      {
+        key: "ingredients",
+        label: "Ingredients (one per line, with measurements)",
+        type: "list",
+        placeholder: "200 g flour",
+      },
       { key: "steps", label: "Steps (one per line)", type: "list", placeholder: "Whisk the eggs…" },
       { key: "notes", label: "Tips & personal notes", type: "textarea" },
     ],
@@ -69,10 +88,18 @@ export const TEMPLATES: TemplateDef[] = [
     id: "food_story",
     letter: "E",
     label: "Food Story",
-    description: "Editorial writing about meals, cafés and memories, with photos and an optional place.",
+    description:
+      "Editorial writing about meals, cafés and memories, with photos and an optional place.",
     defaultCategory: "food",
     usesGallery: true,
-    fields: [{ key: "location", label: "Place (optional)", type: "text", placeholder: "A little café in Kyoto" }],
+    fields: [
+      {
+        key: "location",
+        label: "Place (optional)",
+        type: "text",
+        placeholder: "A little café in Kyoto",
+      },
+    ],
   },
   {
     id: "ikebana",
@@ -91,13 +118,66 @@ export const TEMPLATES: TemplateDef[] = [
     id: "haiku",
     letter: "G",
     label: "Haiku / Poetry",
-    description: "Centered poetry with preserved line breaks and optional Japanese, romaji & translation.",
+    description:
+      "Centered poetry with preserved line breaks and optional Japanese, romaji & translation.",
     defaultCategory: "japanese",
     fields: [
-      { key: "japanese", label: "Japanese text (optional)", type: "textarea", hint: "Line breaks are kept exactly." },
+      {
+        key: "japanese",
+        label: "Japanese text (optional)",
+        type: "textarea",
+        hint: "Line breaks are kept exactly.",
+      },
       { key: "romaji", label: "Romanization (optional)", type: "textarea" },
       { key: "english", label: "English / translation", type: "textarea" },
       { key: "poet", label: "Poet (leave blank if it's yours)", type: "text" },
+    ],
+  },
+  {
+    id: "paper",
+    letter: "H",
+    label: "Paper Notes",
+    description:
+      "Your summary and thoughts on a research paper: citation, link, key findings and your own chatter.",
+    defaultCategory: "entomology",
+    usesGallery: true,
+    fields: [
+      {
+        key: "paper_title",
+        label: "Paper title",
+        type: "textarea",
+        placeholder: "Synchronous flashing in fireflies…",
+      },
+      { key: "authors", label: "Authors", type: "text", placeholder: "Sarfati, R. et al." },
+      {
+        key: "journal",
+        label: "Journal",
+        type: "text",
+        placeholder: "Science Advances",
+        italic: true,
+      },
+      { key: "year", label: "Year", type: "text", placeholder: "2021" },
+      {
+        key: "link",
+        label: "Link to the paper (or DOI)",
+        type: "text",
+        placeholder: "https://doi.org/…",
+      },
+      {
+        key: "species",
+        label: "Insects studied (optional)",
+        type: "text",
+        placeholder: "Photinus carolinus",
+        italic: true,
+        hint: "Shown in italics.",
+      },
+      { key: "read_on", label: "Date you read it", type: "date" },
+      {
+        key: "findings",
+        label: "Key findings (one per line)",
+        type: "list",
+        placeholder: "Fireflies only sync when they can see each other",
+      },
     ],
   },
 ];

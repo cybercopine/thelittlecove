@@ -579,7 +579,9 @@ function Editor({ post }: { post: AdminPost }) {
                   ? "Reflection beneath the poem"
                   : draft.template === "recipe"
                     ? "Introduction & notes"
-                    : "Your writing"}
+                    : draft.template === "paper"
+                      ? "My thoughts & chatter"
+                      : "Your writing"}
               </h2>
               <span className="text-xs text-muted-foreground">
                 {words} words · {readingTime(draft.content_html)} min read

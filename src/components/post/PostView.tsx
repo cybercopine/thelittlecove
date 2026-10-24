@@ -36,8 +36,17 @@ function Gallery({ items, large }: { items: PublicPost["gallery"]; large?: boole
     <div className={`mt-10 grid gap-6 ${large ? "sm:grid-cols-2" : "grid-cols-2 sm:grid-cols-3"}`}>
       {items.map((g, i) => (
         <figure key={i} className={`polaroid ${i % 2 ? "rotate-[1deg]" : "rotate-[-1deg]"}`}>
-          <img src={g.url} alt={g.alt ?? g.caption ?? ""} loading="lazy" className="aspect-[4/5] w-full object-cover" />
-          {g.caption && <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">{g.caption}</figcaption>}
+          <img
+            src={g.url}
+            alt={g.alt ?? g.caption ?? ""}
+            loading="lazy"
+            className="aspect-[4/5] w-full object-cover"
+          />
+          {g.caption && (
+            <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">
+              {g.caption}
+            </figcaption>
+          )}
         </figure>
       ))}
     </div>
@@ -48,9 +57,18 @@ function Header({ post, kicker }: { post: PublicPost; kicker?: string }) {
   return (
     <header className="text-center">
       {post.is_placeholder && <PlaceholderBadge />}
-      <DateStamp date={post.published_at} extra={kicker ?? `${readingTime(post.content_html)} min read`} />
-      <h1 className="mx-auto mt-2 max-w-3xl text-4xl leading-[1.1] text-moss sm:text-6xl">{post.title}</h1>
-      {post.subtitle && <p className="mx-auto mt-3 max-w-2xl font-display text-xl italic text-muted-foreground sm:text-2xl">{post.subtitle}</p>}
+      <DateStamp
+        date={post.published_at}
+        extra={kicker ?? `${readingTime(post.content_html)} min read`}
+      />
+      <h1 className="mx-auto mt-2 max-w-3xl text-4xl leading-[1.1] text-moss sm:text-6xl">
+        {post.title}
+      </h1>
+      {post.subtitle && (
+        <p className="mx-auto mt-3 max-w-2xl font-display text-xl italic text-muted-foreground sm:text-2xl">
+          {post.subtitle}
+        </p>
+      )}
     </header>
   );
 }
@@ -66,7 +84,10 @@ export function PostView({ post }: { post: PublicPost }) {
             {post.is_placeholder && <PlaceholderBadge />}
             <p className="font-hand text-lg text-muted-foreground">{fmtDate(post.published_at)}</p>
             {post.title && <h1 className="mt-1 text-4xl text-moss">{post.title}</h1>}
-            <div className="mt-4 font-hand text-2xl leading-8 [&_p+p]:mt-4 [&_a]:underline" dangerouslySetInnerHTML={{ __html: post.content_html }} />
+            <div
+              className="mt-4 font-hand text-2xl leading-8 [&_p+p]:mt-4 [&_a]:underline"
+              dangerouslySetInnerHTML={{ __html: post.content_html }}
+            />
           </div>
           <Tags post={post} />
         </article>
@@ -78,22 +99,51 @@ export function PostView({ post }: { post: PublicPost }) {
           <div className="paper relative p-6 sm:p-10">
             <span className="tape -top-3 left-12 rotate-[-4deg]" />
             {post.is_placeholder && <PlaceholderBadge />}
-            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Field notebook · plate no. {f.specimen_no || "—"}</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+              Field notebook · plate no. {f.specimen_no || "—"}
+            </p>
             <h1 className="mt-2 text-4xl text-moss sm:text-5xl">{f.common_name || post.title}</h1>
-            {f.scientific_name && <p className="mt-1 font-display text-2xl italic text-foreground/80">{f.scientific_name}</p>}
+            {f.scientific_name && (
+              <p className="mt-1 font-display text-2xl italic text-foreground/80">
+                {f.scientific_name}
+              </p>
+            )}
             <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-dashed border-sage py-4 font-hand text-lg sm:grid-cols-3">
-              <div><dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">Observed</dt><dd>{fmtDate(f.observed_on) || "—"}</dd></div>
-              <div><dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">Location</dt><dd>{f.location || "—"}</dd></div>
-              <div><dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">Entry</dt><dd>{fmtDate(post.published_at)}</dd></div>
+              <div>
+                <dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">
+                  Observed
+                </dt>
+                <dd>{fmtDate(f.observed_on) || "—"}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">
+                  Location
+                </dt>
+                <dd>{f.location || "—"}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-widest text-muted-foreground font-serif">
+                  Entry
+                </dt>
+                <dd>{fmtDate(post.published_at)}</dd>
+              </div>
             </dl>
             <div className="mt-8 grid gap-8 md:grid-cols-[1.1fr_1fr]">
               <figure className="polaroid rotate-[-1deg] self-start">
                 {post.cover_image_url ? (
-                  <img src={post.cover_image_url} alt={post.cover_image_alt ?? ""} className="w-full object-cover" />
+                  <img
+                    src={post.cover_image_url}
+                    alt={post.cover_image_alt ?? ""}
+                    className="w-full object-cover"
+                  />
                 ) : (
                   <Moth className="mx-auto h-40 w-full" />
                 )}
-                {post.cover_image_alt && <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">{post.cover_image_alt}</figcaption>}
+                {post.cover_image_alt && (
+                  <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">
+                    {post.cover_image_alt}
+                  </figcaption>
+                )}
               </figure>
               <Body html={post.content_html} />
             </div>
@@ -104,7 +154,18 @@ export function PostView({ post }: { post: PublicPost }) {
                 <ol className="mt-3 list-decimal space-y-1 pl-5 text-[0.95rem]">
                   {f.references.map((r: any, i: number) => (
                     <li key={i}>
-                      {r.url ? <a href={r.url} target="_blank" rel="noreferrer" className="text-moss underline underline-offset-2">{r.label || r.url}</a> : r.label}
+                      {r.url ? (
+                        <a
+                          href={r.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-moss underline underline-offset-2"
+                        >
+                          {r.label || r.url}
+                        </a>
+                      ) : (
+                        r.label
+                      )}
                     </li>
                   ))}
                 </ol>
@@ -123,12 +184,22 @@ export function PostView({ post }: { post: PublicPost }) {
             <span className="tape -top-3 right-14 rotate-[5deg]" />
             <div>
               {post.cover_image_url && (
-                <img src={post.cover_image_url} alt={post.cover_image_alt ?? ""} className="polaroid mb-6 w-full rotate-[-1.5deg] object-cover" />
+                <img
+                  src={post.cover_image_url}
+                  alt={post.cover_image_alt ?? ""}
+                  className="polaroid mb-6 w-full rotate-[-1.5deg] object-cover"
+                />
               )}
               <dl className="grid grid-cols-3 gap-2 text-center">
-                {[["Prep", f.prep_time], ["Cook", f.cook_time], ["Serves", f.servings]].map(([k, v]) => (
+                {[
+                  ["Prep", f.prep_time],
+                  ["Cook", f.cook_time],
+                  ["Serves", f.servings],
+                ].map(([k, v]) => (
                   <div key={k} className="border border-dashed border-sage bg-pale/50 py-2">
-                    <dt className="text-[0.68rem] uppercase tracking-widest text-muted-foreground">{k}</dt>
+                    <dt className="text-[0.68rem] uppercase tracking-widest text-muted-foreground">
+                      {k}
+                    </dt>
                     <dd className="font-hand text-xl">{v || "—"}</dd>
                   </div>
                 ))}
@@ -138,7 +209,10 @@ export function PostView({ post }: { post: PublicPost }) {
                   <h2 className="text-2xl text-moss">Ingredients</h2>
                   <ul className="mt-2 space-y-1.5">
                     {f.ingredients.map((x: string, i: number) => (
-                      <li key={i} className="flex gap-2 border-b border-dotted border-sage pb-1"><span className="text-sage">✿</span>{x}</li>
+                      <li key={i} className="flex gap-2 border-b border-dotted border-sage pb-1">
+                        <span className="text-sage">✿</span>
+                        {x}
+                      </li>
                     ))}
                   </ul>
                 </section>
@@ -161,11 +235,16 @@ export function PostView({ post }: { post: PublicPost }) {
               )}
               {f.notes && (
                 <aside className="mt-8 rotate-[0.6deg] bg-note p-4 font-hand text-xl leading-7 shadow-sm">
-                  <span className="text-sm uppercase tracking-widest text-muted-foreground font-serif">notes · </span>
+                  <span className="text-sm uppercase tracking-widest text-muted-foreground font-serif">
+                    notes ·{" "}
+                  </span>
                   {f.notes}
                 </aside>
               )}
-              <button onClick={() => window.print()} className="no-print mt-6 inline-flex items-center gap-2 text-sm text-moss underline underline-offset-4">
+              <button
+                onClick={() => window.print()}
+                className="no-print mt-6 inline-flex items-center gap-2 text-sm text-moss underline underline-offset-4"
+              >
                 <Printer className="h-4 w-4" /> Print this recipe
               </button>
             </div>
@@ -178,27 +257,146 @@ export function PostView({ post }: { post: PublicPost }) {
     case "ikebana":
       return (
         <article className="mx-auto max-w-5xl py-10">
-          <Header post={post} kicker={f.arranged_on ? `arranged ${fmtDate(f.arranged_on)}` : "ikebana"} />
-          {f.arrangement_title && <p className="mt-2 text-center font-hand text-2xl text-muted-foreground">“{f.arrangement_title}”</p>}
+          <Header
+            post={post}
+            kicker={f.arranged_on ? `arranged ${fmtDate(f.arranged_on)}` : "ikebana"}
+          />
+          {f.arrangement_title && (
+            <p className="mt-2 text-center font-hand text-2xl text-muted-foreground">
+              “{f.arrangement_title}”
+            </p>
+          )}
           {post.cover_image_url && (
             <figure className="mx-auto mt-10 max-w-2xl">
-              <img src={post.cover_image_url} alt={post.cover_image_alt ?? ""} className="w-full object-cover shadow-lg" />
-              {post.cover_image_alt && <figcaption className="mt-3 text-center font-hand text-lg text-muted-foreground">{post.cover_image_alt}</figcaption>}
+              <img
+                src={post.cover_image_url}
+                alt={post.cover_image_alt ?? ""}
+                className="w-full object-cover shadow-lg"
+              />
+              {post.cover_image_alt && (
+                <figcaption className="mt-3 text-center font-hand text-lg text-muted-foreground">
+                  {post.cover_image_alt}
+                </figcaption>
+              )}
             </figure>
           )}
           <div className="mx-auto mt-12 grid max-w-3xl gap-10 md:grid-cols-[200px_1fr]">
             {Array.isArray(f.materials) && f.materials.length > 0 && (
               <aside className="self-start border-l-2 border-sage pl-4">
-                <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Materials</h2>
-                <ul className="mt-2 space-y-1 font-hand text-xl">{f.materials.map((m: string, i: number) => <li key={i}>{m}</li>)}</ul>
+                <h2 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  Materials
+                </h2>
+                <ul className="mt-2 space-y-1 font-hand text-xl">
+                  {f.materials.map((m: string, i: number) => (
+                    <li key={i}>{m}</li>
+                  ))}
+                </ul>
               </aside>
             )}
             <Body html={post.content_html} />
           </div>
           <Gallery items={post.gallery.filter((g) => g.url !== post.cover_image_url)} large />
-          <div className="mx-auto max-w-3xl"><Tags post={post} /></div>
+          <div className="mx-auto max-w-3xl">
+            <Tags post={post} />
+          </div>
         </article>
       );
+
+    case "paper": {
+      const href =
+        typeof f.link === "string" && f.link.trim()
+          ? /^https?:\/\//i.test(f.link.trim())
+            ? f.link.trim()
+            : /^10\.\d{4,}\//.test(f.link.trim())
+              ? `https://doi.org/${f.link.trim()}`
+              : null
+          : null;
+      const findings: string[] = Array.isArray(f.findings) ? f.findings.filter(Boolean) : [];
+      return (
+        <article className="mx-auto max-w-3xl py-10">
+          <Header
+            post={post}
+            kicker={`paper notes${f.read_on ? ` · read ${fmtDate(f.read_on)}` : ""}`}
+          />
+          <section
+            aria-label="The paper"
+            className="relative mx-auto mt-10 max-w-2xl rotate-[-0.5deg] border border-oat bg-ivory p-6 shadow-sm sm:p-8"
+          >
+            <span className="tape -top-3 left-10 rotate-[-4deg]" />
+            <p className="text-[0.68rem] uppercase tracking-[0.25em] text-muted-foreground">
+              The paper
+            </p>
+            {f.paper_title && (
+              <p className="mt-2 font-display text-2xl leading-snug text-foreground sm:text-[1.7rem]">
+                {f.paper_title}
+              </p>
+            )}
+            <p className="mt-2 text-[0.98rem] text-foreground/75">
+              {[f.authors, f.year && `(${f.year})`].filter(Boolean).join(" ")}
+              {f.journal && (
+                <>
+                  {f.authors || f.year ? " · " : ""}
+                  <em>{f.journal}</em>
+                </>
+              )}
+            </p>
+            {f.species && (
+              <p className="mt-3 font-hand text-xl text-moss">
+                studying <em className="font-display text-lg">{f.species}</em>
+              </p>
+            )}
+            {href && (
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-block text-sm text-moss underline underline-offset-4"
+              >
+                Read the paper →
+              </a>
+            )}
+          </section>
+          {findings.length > 0 && (
+            <section className="mx-auto mt-10 max-w-2xl">
+              <h2 className="text-2xl text-moss">Key findings</h2>
+              <ol className="mt-4 space-y-3">
+                {findings.map((x, i) => (
+                  <li
+                    key={i}
+                    className="grid grid-cols-[2rem_1fr] gap-2 border-b border-dotted border-sage pb-3 leading-7"
+                  >
+                    <span className="font-display text-2xl leading-7 text-sage">{i + 1}.</span>
+                    <span>{x}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+          {post.cover_image_url && (
+            <figure className="polaroid mx-auto mt-10 max-w-md rotate-[1deg]">
+              <img
+                src={post.cover_image_url}
+                alt={post.cover_image_alt ?? ""}
+                className="w-full object-cover"
+              />
+              {post.cover_image_alt && (
+                <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">
+                  {post.cover_image_alt}
+                </figcaption>
+              )}
+            </figure>
+          )}
+          {post.content_html && (
+            <div className="paper relative mt-10 p-6 sm:p-12">
+              <p className="mb-4 font-hand text-2xl text-muted-foreground">my thoughts ~</p>
+              <Body html={post.content_html} />
+            </div>
+          )}
+          <Gallery items={post.gallery} />
+          <Tags post={post} />
+        </article>
+      );
+    }
 
     case "haiku":
       return (
@@ -208,8 +406,19 @@ export function PostView({ post }: { post: PublicPost }) {
           <h1 className="mt-1 text-3xl text-moss">{post.title}</h1>
           <div className="paper relative mx-auto mt-10 px-6 py-14 sm:px-16">
             <span className="tape -top-3 left-1/2 -translate-x-1/2 rotate-[2deg]" />
-            {f.japanese && <p lang="ja" className="jp whitespace-pre-line text-2xl leading-[2.4] tracking-[0.12em] sm:text-3xl">{f.japanese}</p>}
-            {f.romaji && <p className="mt-8 whitespace-pre-line font-display text-lg italic leading-8 text-muted-foreground">{f.romaji}</p>}
+            {f.japanese && (
+              <p
+                lang="ja"
+                className="jp whitespace-pre-line text-2xl leading-[2.4] tracking-[0.12em] sm:text-3xl"
+              >
+                {f.japanese}
+              </p>
+            )}
+            {f.romaji && (
+              <p className="mt-8 whitespace-pre-line font-display text-lg italic leading-8 text-muted-foreground">
+                {f.romaji}
+              </p>
+            )}
             {f.english && (
               <>
                 {(f.japanese || f.romaji) && <Divider className="my-8" />}
@@ -218,9 +427,19 @@ export function PostView({ post }: { post: PublicPost }) {
             )}
             {f.poet && <p className="mt-6 font-hand text-xl text-muted-foreground">— {f.poet}</p>}
           </div>
-          {post.cover_image_url && <img src={post.cover_image_url} alt={post.cover_image_alt ?? ""} className="mx-auto mt-10 max-h-64 opacity-90" />}
-          <div className="mx-auto mt-10 max-w-lg text-left"><Body html={post.content_html} /></div>
-          <div className="flex justify-center"><Tags post={post} /></div>
+          {post.cover_image_url && (
+            <img
+              src={post.cover_image_url}
+              alt={post.cover_image_alt ?? ""}
+              className="mx-auto mt-10 max-h-64 opacity-90"
+            />
+          )}
+          <div className="mx-auto mt-10 max-w-lg text-left">
+            <Body html={post.content_html} />
+          </div>
+          <div className="flex justify-center">
+            <Tags post={post} />
+          </div>
         </article>
       );
 
@@ -229,11 +448,24 @@ export function PostView({ post }: { post: PublicPost }) {
     default:
       return (
         <article className="mx-auto max-w-3xl py-10">
-          <Header post={post} kicker={f.location ? `${f.location} · ${readingTime(post.content_html)} min read` : undefined} />
+          <Header
+            post={post}
+            kicker={
+              f.location ? `${f.location} · ${readingTime(post.content_html)} min read` : undefined
+            }
+          />
           {post.cover_image_url && (
             <figure className="polaroid mx-auto mt-10 max-w-2xl rotate-[-0.8deg]">
-              <img src={post.cover_image_url} alt={post.cover_image_alt ?? ""} className="w-full object-cover" />
-              {post.cover_image_alt && <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">{post.cover_image_alt}</figcaption>}
+              <img
+                src={post.cover_image_url}
+                alt={post.cover_image_alt ?? ""}
+                className="w-full object-cover"
+              />
+              {post.cover_image_alt && (
+                <figcaption className="mt-2 text-center font-hand text-lg text-muted-foreground">
+                  {post.cover_image_alt}
+                </figcaption>
+              )}
             </figure>
           )}
           <div className="paper mt-10 p-6 sm:p-12">
@@ -249,11 +481,19 @@ export function PostView({ post }: { post: PublicPost }) {
 export function Breadcrumbs({ post }: { post: PublicPost }) {
   return (
     <nav aria-label="Breadcrumb" className="pt-6 text-sm text-muted-foreground">
-      <Link to="/" className="hover:text-moss">The Little Cove</Link>
+      <Link to="/" className="hover:text-moss">
+        The Little Cove
+      </Link>
       <span className="mx-2">›</span>
       {post.category && (
         <>
-          <Link to="/$category" params={{ category: post.category.slug }} className="hover:text-moss">{post.category.name}</Link>
+          <Link
+            to="/$category"
+            params={{ category: post.category.slug }}
+            className="hover:text-moss"
+          >
+            {post.category.name}
+          </Link>
           <span className="mx-2">›</span>
         </>
       )}
