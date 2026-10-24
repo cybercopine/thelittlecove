@@ -65,7 +65,7 @@
   --stamp: oklch(0.58 0.13 25);
   --note: oklch(0.97 0.035 95);
   --paper: oklch(0.99 0.006 95);
-  --book: oklch(0.966 0.015 118);
+  --book: oklch(0.972 0.011 112);
   --grid: oklch(0.72 0.06 145);
 
   --background: oklch(0.945 0.015 95);
@@ -121,14 +121,14 @@
 @utility font-display { font-family: var(--font-display); }
 
 @utility book {
-  /* soft green graph paper: 24px squares, a slightly stronger line every 4 squares */
+  /* soft green graph paper: 16px squares, a slightly stronger line every 4 squares */
   background-color: var(--book);
   background-image:
-    linear-gradient(color-mix(in oklab, var(--grid) 40%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--grid) 40%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in oklab, var(--grid) 20%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--grid) 20%, transparent) 1px, transparent 1px);
-  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    linear-gradient(color-mix(in oklab, var(--grid) 26%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--grid) 26%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
   background-position: -1px -1px;
   border: 1px solid color-mix(in oklab, var(--moss) 25%, transparent);
   box-shadow: 0 1px 0 var(--border), 0 30px 60px -40px color-mix(in oklab, var(--moss) 45%, transparent);
