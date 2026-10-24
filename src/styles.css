@@ -55,37 +55,37 @@
 
 :root {
   --radius: 0.25rem;
-  /* palette B "warm & unified": warm oat surroundings, cream paper, green used as the accent */
-  --sage: oklch(0.82 0.045 135);
-  --pale: oklch(0.94 0.025 120);
-  --ivory: oklch(0.977 0.012 86);
-  --oat: oklch(0.89 0.03 75);
-  --moss: oklch(0.47 0.055 135);
+  /* palette C "fresh sage": soft green surroundings, clean white page, leafy green accents */
+  --sage: oklch(0.82 0.06 150);
+  --pale: oklch(0.95 0.025 150);
+  --ivory: oklch(0.985 0.006 130);
+  --oat: oklch(0.93 0.025 150);
+  --moss: oklch(0.46 0.075 152);
   --blush: oklch(0.86 0.04 20);
   --stamp: oklch(0.58 0.13 25);
-  --note: oklch(0.96 0.04 90);
-  --paper: oklch(0.993 0.006 85);
-  --book: oklch(0.975 0.013 85);
-  --grid: oklch(0.7 0.045 125);
+  --note: oklch(0.97 0.035 100);
+  --paper: oklch(1 0 0);
+  --book: oklch(0.985 0.004 120);
+  --grid: oklch(0.68 0.07 150);
 
-  --background: oklch(0.915 0.022 78);
-  --foreground: oklch(0.3 0.02 70);
+  --background: oklch(0.91 0.028 150);
+  --foreground: oklch(0.27 0.03 155);
   --card: var(--paper);
-  --card-foreground: oklch(0.3 0.02 70);
+  --card-foreground: oklch(0.27 0.03 155);
   --popover: var(--paper);
-  --popover-foreground: oklch(0.3 0.02 70);
+  --popover-foreground: oklch(0.27 0.03 155);
   --primary: var(--moss);
   --primary-foreground: var(--ivory);
   --secondary: var(--pale);
   --secondary-foreground: oklch(0.35 0.035 140);
-  --muted: oklch(0.94 0.015 80);
-  --muted-foreground: oklch(0.5 0.025 70);
+  --muted: oklch(0.95 0.012 150);
+  --muted-foreground: oklch(0.48 0.03 155);
   --accent: var(--pale);
   --accent-foreground: oklch(0.32 0.035 140);
   --destructive: oklch(0.55 0.15 28);
   --destructive-foreground: var(--ivory);
-  --border: oklch(0.87 0.022 80);
-  --input: oklch(0.85 0.022 80);
+  --border: oklch(0.88 0.018 150);
+  --input: oklch(0.86 0.02 150);
   --ring: var(--moss);
   --sidebar: var(--ivory);
   --sidebar-foreground: var(--foreground);
@@ -124,8 +124,8 @@
   /* soft green graph paper: 16px squares, a slightly stronger line every 4 squares */
   background-color: var(--book);
   background-image:
-    linear-gradient(color-mix(in oklab, var(--grid) 26%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--grid) 26%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in oklab, var(--grid) 25%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--grid) 25%, transparent) 1px, transparent 1px),
     linear-gradient(color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px);
   background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;

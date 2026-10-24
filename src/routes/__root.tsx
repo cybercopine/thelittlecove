@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "The Little Cove" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#E9E0D2" },
+      { name: "theme-color", content: "#DDE8DD" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
