@@ -55,37 +55,35 @@
 
 :root {
   --radius: 0.25rem;
-  /* palette C "fresh sage": soft green surroundings, clean white page, leafy green accents */
-  --sage: oklch(0.82 0.06 150);
-  --pale: oklch(0.95 0.025 150);
-  --ivory: oklch(0.985 0.006 130);
-  --oat: oklch(0.93 0.025 150);
-  --moss: oklch(0.46 0.075 152);
+  /* palette: sage #B8CBB5, pale #E6EDDF, ivory #FAF8F1, oat #D9D0BF, moss #596B57 */
+  --sage: oklch(0.83 0.035 145);
+  --pale: oklch(0.935 0.02 130);
+  --ivory: oklch(0.977 0.012 95);
+  --oat: oklch(0.86 0.025 85);
+  --moss: oklch(0.5 0.04 140);
   --blush: oklch(0.86 0.04 20);
   --stamp: oklch(0.58 0.13 25);
-  --note: oklch(0.97 0.035 100);
-  --paper: oklch(1 0 0);
-  --book: oklch(0.985 0.004 120);
-  --grid: oklch(0.68 0.07 150);
+  --note: oklch(0.97 0.035 95);
+  --paper: oklch(0.99 0.006 95);
 
-  --background: oklch(0.91 0.028 150);
-  --foreground: oklch(0.27 0.03 155);
+  --background: oklch(0.945 0.015 95);
+  --foreground: oklch(0.3 0.025 140);
   --card: var(--paper);
-  --card-foreground: oklch(0.27 0.03 155);
+  --card-foreground: oklch(0.3 0.025 140);
   --popover: var(--paper);
-  --popover-foreground: oklch(0.27 0.03 155);
+  --popover-foreground: oklch(0.3 0.025 140);
   --primary: var(--moss);
   --primary-foreground: var(--ivory);
   --secondary: var(--pale);
   --secondary-foreground: oklch(0.35 0.035 140);
-  --muted: oklch(0.95 0.012 150);
-  --muted-foreground: oklch(0.48 0.03 155);
+  --muted: oklch(0.93 0.015 100);
+  --muted-foreground: oklch(0.47 0.025 120);
   --accent: var(--pale);
   --accent-foreground: oklch(0.32 0.035 140);
   --destructive: oklch(0.55 0.15 28);
   --destructive-foreground: var(--ivory);
-  --border: oklch(0.88 0.018 150);
-  --input: oklch(0.86 0.02 150);
+  --border: oklch(0.86 0.02 100);
+  --input: oklch(0.84 0.02 100);
   --ring: var(--moss);
   --sidebar: var(--ivory);
   --sidebar-foreground: var(--foreground);
@@ -121,16 +119,10 @@
 @utility font-display { font-family: var(--font-display); }
 
 @utility book {
-  /* soft green graph paper: 16px squares, a slightly stronger line every 4 squares */
-  background-color: var(--book);
+  background-color: var(--ivory);
   background-image:
-    linear-gradient(color-mix(in oklab, var(--grid) 25%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--grid) 25%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--grid) 13%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
-  background-position: -1px -1px;
-  border: 1px solid color-mix(in oklab, var(--moss) 25%, transparent);
+    repeating-linear-gradient(90deg, transparent 0 22px, color-mix(in oklab, var(--oat) 18%, transparent) 22px 23px),
+    radial-gradient(circle at 20% 10%, color-mix(in oklab, var(--pale) 60%, transparent), transparent 50%);
   box-shadow: 0 1px 0 var(--border), 0 30px 60px -40px color-mix(in oklab, var(--moss) 45%, transparent);
 }
 

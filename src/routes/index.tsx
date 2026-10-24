@@ -44,7 +44,7 @@ function Home() {
     <div className="relative">
       {/* stamp */}
       <div
-        className="pointer-events-none absolute right-2 top-2 z-20 hidden h-24 w-24 rotate-[-8deg] place-items-center rounded-full border border-dashed border-moss/50 bg-ivory/85 text-center text-[0.6rem] uppercase leading-4 tracking-[0.2em] text-moss/80 shadow-[0_0_0_4px_var(--book)] lg:grid"
+        className="pointer-events-none absolute right-2 top-2 z-20 hidden h-24 w-24 rotate-[-8deg] place-items-center rounded-full border border-dashed border-moss/50 bg-ivory/85 text-center text-[0.6rem] uppercase leading-4 tracking-[0.2em] text-moss/80 shadow-[0_0_0_4px_var(--ivory)] lg:grid"
         aria-hidden
       >
         <span>

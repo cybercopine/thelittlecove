@@ -38,7 +38,7 @@ function Header() {
   const active = { className: "text-moss border-b border-moss" };
 
   return (
-    <header className="sticky top-0 z-30 -mx-4 bg-[color-mix(in_oklab,var(--book)_92%,transparent)] px-4 pt-5 pb-4 backdrop-blur-sm sm:-mx-10 sm:px-10 sm:pt-8">
+    <header className="sticky top-0 z-30 -mx-4 bg-ivory/90 px-4 pt-5 pb-4 backdrop-blur-sm sm:-mx-10 sm:px-10 sm:pt-8">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
         <Link to="/" className="group flex min-w-0 items-center gap-3" aria-label="The Little Cove — home">
           <Leaf className="h-7 w-7 shrink-0 text-moss transition-transform duration-500 group-hover:rotate-[-12deg] sm:h-8 sm:w-8" />
